@@ -13,6 +13,12 @@ describe('Teste de Validações no Checkout', () =>{
         LoginPage.loginUsuarioPadraoStandardUser();
     })
 
+    //O after irá remover o item que ficou no carrinho após o último teste para não atrapalhar os demais testes.
+    after(() => {
+        CheckoutPage.clicarCancel();
+        CarrinhoPage.clicarRemoverProdutoUnico();
+    })
+
     //Validação de bloqueio na compra de item sem preenchimento de informações no checkout.
     it('Tentativa de compra de item sem informações no checkout', () => {
         ProductsPage.clicarAdicaoCarrinhoItem1();
@@ -39,8 +45,6 @@ describe('Teste de Validações no Checkout', () =>{
         CheckoutPage.preencherLastName('Feijão');
         CheckoutPage.clicarContinue();
         CheckoutPage.validacaoCheckoutPostalCodeErro();
-        CheckoutPage.clicarCancel();
-        CarrinhoPage.clicarRemoverProdutoUnico();
     })
 
 })
